@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class A {
-
     public void foo() {
         System.out.println("This is the foo method inside class A");
     }

@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class MyAspect {
     static HashMap<String, Long> hm = new HashMap<String, Long>();
 
+
     @Around("@annotation(com.limiter.annotation.RateLimit)")
     public Object interceptor(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 //        long startTime = System.currentTimeMillis();
@@ -19,7 +20,7 @@ public class MyAspect {
 //        long endTime = System.currentTimeMillis();
         Object obj = null;
         String key = proceedingJoinPoint.getSignature().toString();
-        //System.out.println("Contains: " + hm.containsKey(key));
+        System.out.println("Contains: " + key);
         if(hm.containsKey(key)) {
             if(System.currentTimeMillis() - hm.get(key) > 5000) {
                 obj = proceedingJoinPoint.proceed();

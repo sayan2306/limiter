@@ -1,5 +1,5 @@
 package com.limiter.strategies;
 
 public interface RateLimitingStrategy {
-    public boolean allow();
+    public boolean allow(String key);
 }

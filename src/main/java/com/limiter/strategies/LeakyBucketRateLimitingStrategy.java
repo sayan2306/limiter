@@ -10,7 +10,6 @@ public class LeakyBucketRateLimitingStrategy implements RateLimitingStrategy {
     private final long REQUEST_INTERVAL_MILLIS;
 
     public LeakyBucketRateLimitingStrategy(int maxRequestPerSec) {
-        //super(maxRequestPerSec);
         REQUEST_INTERVAL_MILLIS = 1000 / maxRequestPerSec;
         nextAllowedTime = System.currentTimeMillis();
     }
@@ -18,9 +17,11 @@ public class LeakyBucketRateLimitingStrategy implements RateLimitingStrategy {
     @Override
     public boolean allow(String key) {
         long curTime = System.currentTimeMillis();
+        hm.putIfAbsent(key, nextAllowedTime);
         synchronized (this) {
-            if (curTime >= nextAllowedTime) {
+            if (curTime >= hm.get(key)) {
                 nextAllowedTime = curTime + REQUEST_INTERVAL_MILLIS;
+                hm.put(key, nextAllowedTime);
                 return true;
             }
             return false;

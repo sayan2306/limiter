@@ -18,11 +18,21 @@ public class Main implements CommandLineRunner {
     private A a;
     public void run(String... args) throws Exception {
         a.bar();
+        a.bar();
+        a.bar();
+        a.bar();
         Thread.sleep(1000);
         a.bar();
-        Thread.sleep(6000);
         a.bar();
-
+        a.bar();
+        a.bar();
+        a.bar();
+        a.bar();
+        a.bar();
+        a.bar();
+        a.bar();
+        a.bar();
+        a.bar();
     }
 
 }

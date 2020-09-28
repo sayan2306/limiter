@@ -12,13 +12,12 @@ import java.util.concurrent.ConcurrentMap;
 @Aspect
 @Component
 public class RateLimiterAspect {
+    RateLimitingStrategy strategy = new LeakyBucketRateLimitingStrategy(1000);
 
     @Around("@annotation(com.limiter.annotation.RateLimit)")
     public Object interceptor(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object obj = null;
         String key = proceedingJoinPoint.getSignature().toString();
-
-        RateLimitingStrategy strategy = new LeakyBucketRateLimitingStrategy(5);
         if(strategy.allow(key)) {
             obj = proceedingJoinPoint.proceed();
         } else {

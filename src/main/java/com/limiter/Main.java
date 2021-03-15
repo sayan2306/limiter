@@ -17,22 +17,52 @@ public class Main implements CommandLineRunner {
     @Autowired
     private A a;
     public void run(String... args) throws Exception {
-        a.bar();
-        a.bar();
-        a.bar();
-        a.bar();
-        Thread.sleep(1000);
-        a.bar();
-        a.bar();
-        a.bar();
-        a.bar();
-        a.bar();
-        a.bar();
-        a.bar();
-        a.bar();
-        a.bar();
-        a.bar();
-        a.bar();
+        Thread t1 = new Thread() {
+            public void run(){
+                try {
+                    System.out.println("SOUT " + a.bar("t1"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        t1.start();
+
+
+        Thread t2 = new Thread() {
+            public void run(){
+                try {
+                    System.out.println("SOUT " + a.bar("t2"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        t2.start();
+
+
+        Thread t3 = new Thread() {
+            public void run(){
+                try {
+                    System.out.println("SOUT " + a.bar("t3"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        t3.start();
+
+
+        Thread t4 = new Thread() {
+            public void run(){
+                try {
+                    System.out.println("SOUT " + a.bar("t4"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        t4.start();
     }
 
 }

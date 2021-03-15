@@ -12,7 +12,9 @@ public class A {
     }
 
     @RateLimit
-    public void bar() throws Exception{
-        System.out.println("This is the bar method inside class A");
+    public int bar(String t) throws Exception{
+        Thread.sleep(5000);
+        System.out.println("This is the bar method inside class A for thread " + t);
+        return 1;
     }
 }
